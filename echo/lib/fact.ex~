@@ -1,0 +1,9 @@
+defmodule Fact do
+  def f(1) do
+    1
+  end
+
+  def f(n) when n>1 do
+    n*f(n-1)
+  end
+  

@@ -1,32 +1,50 @@
 # Concurrency in Elixir
 
 ## Basic concepts
-Each process runs a function. When the function terminates, the process ends.
+In Elixir, a process runs a function.
+It has a PID (identificator), that is unique _globally_.
+
+When the function terminates, the process ends.
 Each process owns a _mailbox_, that contains messages received, and can be read.
 
 ## Processes
 Some function for managing processes:
 
-### `self()` 
+### self
+`self()` 
 Answers the pid from the process that call the function.
-
 e.g.
+
 ```terminal
-	iex(1)> self
-	#PID<0.106.0>
+iex(1)> self
+#PID<0.106.0>
 ```
 
-###	`Process.alive?(pid)` 
-
+###	Alive?
+`Process.alive?(pid)` 
 Answers if `pid` process is still running.
 
-###	`spawn(fn)` 
-Creates a new process that runs `fn` function. When `fn` is done, the process dies. Returns pid of new process.
+###	spawn
+`spawn(fn)` 
+Creates a new process that runs `fn` function. When `fn` is done, the process dies. Returns pid on new process.
 
 E.g.
 ```elixir
-	spawn(fn()-> 1+1 end)
+spawn(fn()-> 1+1 end)
 ```
+
+### Register
+`register(pid,name)` 
+Renames **locally** the pid of `pid` process into `name`.
+
+
+### List
+`Process.list`
+Returns all alive processes.
+
+### observer
+`:observer.start`
+Run a window with some info about processes.
 
 ## Messages
 Function for send messages between processes:
